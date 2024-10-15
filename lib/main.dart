@@ -13,7 +13,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Calculator',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(
+            seedColor: const Color.fromARGB(255, 255, 255, 255)),
         useMaterial3: true,
       ),
       home: const MyHomePage(title: 'Calculator'),
@@ -130,17 +131,22 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget _buildButton(String buttonText) {
     return Expanded(
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: OutlinedButton(
-          onPressed: () => _buttonPressed(buttonText),
-          style: OutlinedButton.styleFrom(
-            padding: const EdgeInsets.all(24.0),
-            backgroundColor: Colors.white,
-            foregroundColor: Colors.black,
-            textStyle:
-                const TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+        padding: const EdgeInsets.all(2.0),
+        child: SizedBox(
+          height: 64.0,
+          child: OutlinedButton(
+            onPressed: () => _buttonPressed(buttonText),
+            style: OutlinedButton.styleFrom(
+              backgroundColor: buttonText == '=' ? Colors.blue : Colors.white,
+              foregroundColor: Colors.black,
+              textStyle:
+                  const TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0), // Add this line
+              ),
+            ),
+            child: Text(buttonText),
           ),
-          child: Text(buttonText),
         ),
       ),
     );
@@ -150,7 +156,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        backgroundColor: Colors.white, // Set the background color here
         title: Text(widget.title),
       ),
       body: Column(
