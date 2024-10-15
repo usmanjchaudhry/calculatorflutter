@@ -42,8 +42,8 @@ class _MyHomePageState extends State<MyHomePage> {
   void _buttonPressed(String buttonText) {
     setState(() {
       if (buttonText == 'C') {
-        _output = '0'; // Clear the current output
-        _expression = ''; // Clear the current expression
+        _output = '0';
+        _expression = '';
         _num1 = 0;
         _num2 = 0;
         _operator = '';
@@ -115,13 +115,10 @@ class _MyHomePageState extends State<MyHomePage> {
         _expression = '($_expression)%';
         _history.add(_expression + ' = ' + _output);
       } else {
-        // Handling for number buttons
-        if (_output == '0' || _operator != '' && _output == '0') {
+        if (_output == '0' || (_operator.isNotEmpty && _output == '0')) {
           _output = buttonText;
-          _expression += buttonText;
         } else {
           _output += buttonText;
-          _expression += buttonText;
         }
       }
     });
@@ -161,10 +158,8 @@ class _MyHomePageState extends State<MyHomePage> {
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            // Adjust the size of the history container to avoid overflow
             Container(
-              height: MediaQuery.of(context).size.height *
-                  0.2, // 20% of screen height
+              height: MediaQuery.of(context).size.height * 0.2,
               padding:
                   const EdgeInsets.symmetric(vertical: 16.0, horizontal: 12.0),
               child: ListView.builder(
