@@ -42,9 +42,8 @@ class _MyHomePageState extends State<MyHomePage> {
   void _buttonPressed(String buttonText) {
     setState(() {
       if (buttonText == 'C') {
-        _output = '0';
-        _expression = '';
-        _history.clear();
+        _output = '0'; // Clear the current output
+        _expression = ''; // Clear the current expression
         _num1 = 0;
         _num2 = 0;
         _operator = '';
@@ -142,7 +141,7 @@ class _MyHomePageState extends State<MyHomePage> {
               textStyle:
                   const TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10.0), // Add this line
+                borderRadius: BorderRadius.circular(10.0),
               ),
             ),
             child: Text(buttonText),
@@ -156,102 +155,101 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white, // Set the background color here
+        backgroundColor: Colors.white,
         title: Text(widget.title),
       ),
-      body: Column(
-        children: <Widget>[
-          Expanded(
-            // Makes the history scrollable
-            child: Container(
-              alignment: Alignment.centerRight,
+      body: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            // Adjust the size of the history container to avoid overflow
+            Container(
+              height: MediaQuery.of(context).size.height *
+                  0.2, // 20% of screen height
               padding:
-                  const EdgeInsets.symmetric(vertical: 24.0, horizontal: 12.0),
+                  const EdgeInsets.symmetric(vertical: 16.0, horizontal: 12.0),
               child: ListView.builder(
                 reverse: false,
                 itemCount: _history.length,
                 itemBuilder: (context, index) {
                   return Text(
                     _history[index],
-                    style: const TextStyle(fontSize: 24.0, color: Colors.grey),
+                    style: const TextStyle(fontSize: 20.0, color: Colors.grey),
                   );
                 },
               ),
             ),
-          ),
-          Container(
-            alignment: Alignment.centerRight,
-            padding: const EdgeInsets.fromLTRB(12.0, 12.0, 12.0, 24.0),
-            child: Text(
-              _expression,
-              style: const TextStyle(fontSize: 24.0),
+            Container(
+              alignment: Alignment.centerRight,
+              padding: const EdgeInsets.fromLTRB(12.0, 12.0, 12.0, 24.0),
+              child: Text(
+                _expression,
+                style: const TextStyle(fontSize: 24.0),
+              ),
             ),
-          ),
-          Container(
-            alignment: Alignment.centerRight,
-            padding:
-                const EdgeInsets.symmetric(vertical: 12.0, horizontal: 12.0),
-            child: Text(
-              _output,
-              style:
-                  const TextStyle(fontSize: 48.0, fontWeight: FontWeight.bold),
+            Container(
+              alignment: Alignment.centerRight,
+              padding:
+                  const EdgeInsets.symmetric(vertical: 12.0, horizontal: 12.0),
+              child: Text(
+                _output,
+                style: const TextStyle(
+                    fontSize: 48.0, fontWeight: FontWeight.bold),
+              ),
             ),
-          ),
-          Expanded(
-            child: Divider(),
-          ),
-          Column(
-            children: [
-              Row(
-                children: [
-                  _buildButton('√'),
-                  _buildButton('x²'),
-                  _buildButton('1/x'),
-                  _buildButton('DEL'),
-                ],
-              ),
-              Row(
-                children: [
-                  _buildButton('7'),
-                  _buildButton('8'),
-                  _buildButton('9'),
-                  _buildButton('/'),
-                ],
-              ),
-              Row(
-                children: [
-                  _buildButton('4'),
-                  _buildButton('5'),
-                  _buildButton('6'),
-                  _buildButton('x'),
-                ],
-              ),
-              Row(
-                children: [
-                  _buildButton('1'),
-                  _buildButton('2'),
-                  _buildButton('3'),
-                  _buildButton('-'),
-                ],
-              ),
-              Row(
-                children: [
-                  _buildButton('.'),
-                  _buildButton('0'),
-                  _buildButton('+/-'),
-                  _buildButton('+'),
-                ],
-              ),
-              Row(
-                children: [
-                  _buildButton('C'),
-                  _buildButton('%'),
-                  _buildButton('='),
-                ],
-              ),
-            ],
-          ),
-        ],
+            const Divider(),
+            Column(
+              children: [
+                Row(
+                  children: [
+                    _buildButton('√'),
+                    _buildButton('x²'),
+                    _buildButton('1/x'),
+                    _buildButton('DEL'),
+                  ],
+                ),
+                Row(
+                  children: [
+                    _buildButton('7'),
+                    _buildButton('8'),
+                    _buildButton('9'),
+                    _buildButton('/'),
+                  ],
+                ),
+                Row(
+                  children: [
+                    _buildButton('4'),
+                    _buildButton('5'),
+                    _buildButton('6'),
+                    _buildButton('x'),
+                  ],
+                ),
+                Row(
+                  children: [
+                    _buildButton('1'),
+                    _buildButton('2'),
+                    _buildButton('3'),
+                    _buildButton('-'),
+                  ],
+                ),
+                Row(
+                  children: [
+                    _buildButton('.'),
+                    _buildButton('0'),
+                    _buildButton('+/-'),
+                    _buildButton('+'),
+                  ],
+                ),
+                Row(
+                  children: [
+                    _buildButton('C'),
+                    _buildButton('%'),
+                    _buildButton('='),
+                  ],
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
